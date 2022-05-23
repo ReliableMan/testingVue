@@ -1,7 +1,9 @@
 <template>
+
   <button class="btn">
     <slot></slot>
   </button>
+
 </template>
 
 <script>
@@ -11,6 +13,7 @@ export default {
 </script>
 
 <style scoped>
+
 .btn{
   width: 140px;
   height: 35px;
@@ -22,9 +25,11 @@ export default {
 	background-size: 400% 400%;
 	animation: animate_gradient 4.5s ease infinite;
 }
+
 .butn:hover {
 	animation: none;
 }
+
 @keyframes animate_gradient {
 	0% {
 		background-position: 0% 50%;

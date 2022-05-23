@@ -1,13 +1,22 @@
 // * строим разметку, шаблон 
 <template>    
+
 <div class='app'>
+  
   <div class="header">
     <my-button @click="showModal">Добавить</my-button>
+    <!-- <my-select v-model="selectedSort" :options="sortOptions"></my-select> -->
   </div>
+
   <my-modal v-model:show="modalVisible">
-    <user-form  @create="createUser"/>
+   <user-form  @create="createUser"/>
   </my-modal>
-  <user-list :lists="lists" @remove="removeUser"/>
+
+  <user-list 
+  :lists="sortedUser" 
+  @remove="removeUser" 
+  @sort="sorted" 
+  @sortNum="sortedNum" />
 </div>
 
 </template>
@@ -17,35 +26,57 @@
 import UserForm from "@/components/UserForm";
 import UserList from "@/components/UserList"
 import MyButton from './components/UI/MyButton.vue';
+// import MySelect from './components/UI/MySelect.vue';
 
 
 export default {
   components: {
     UserForm, UserList,
-    MyButton
+    MyButton,
+    // MySelect
   },
   data() {
     return {
-      lists: [
-        {id: 1, userName: "Nastya", userNumber: "+7 941 532 56 87" },
-        {id: 2, userName: "Anastasya", userNumber: "+7 943 532 59 87" },
-        {id: 3, userName: "Stasya", userNumber: "+7 944 532 50 87" }
-      ],
+      lists: [],
       modalVisible: false,
+      selectedSort: '',
+      sortOptions: [
+        {value: 'userName', name: 'По имени'},
+        {value: 'userNumber', name: 'По номеру'}
+      ]
     }
   },
   methods: {
     createUser(user) {
-      this.lists.push(user);
-      this.modalVisible = false;
+        this.lists.push(user);
+        localStorage.setItem('user', JSON.stringify(this.lists));
+        this.modalVisible = false;
     },
     removeUser(list) {
-      this.lists = this.lists.filter(l => l.id !== list.id )
+      this.lists = this.lists.filter(l => l.id !== list.id );
+      localStorage.setItem('user', JSON.stringify(this.lists))
     }, 
     showModal() {
       this.modalVisible = true;
+    },
+    sorted() {
+      this.lists.sort((a, b) => a.userName.localeCompare(b.userName))
+    },
+    sortedNum() {
+       this.lists.sort((a, b) => a.userNumber.localeCompare(b.userNumber) )
     }
   },
+  mounted() {
+   const data = localStorage.getItem('user');
+   data ? this.lists = JSON.parse(data) : null;
+  }, 
+ computed: {
+   sortedUser(){
+     return [...this.lists].sort((user1, user2) => {
+       return user1[this.selectedSort]?.localeCompare(user2[this.selectedSort])
+     })
+   }
+ }
 }
 </script>
 
@@ -57,7 +88,7 @@ export default {
 
 .header{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 </style>

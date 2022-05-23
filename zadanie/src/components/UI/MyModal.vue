@@ -1,8 +1,13 @@
 <template>
-  <div class="modal" v-if="show" @click.stop="hideModal">
+
+  <div class="modal" 
+  v-if="show" 
+  @click.stop="hideModal">
+
     <div @click.stop class="modal_content">
       <slot></slot>
     </div>
+
   </div>
 
 </template>
@@ -25,6 +30,7 @@ export default {
 </script>
 
 <style scoped>
+
 .modal{
   top: 0;
   bottom: 0;
@@ -43,4 +49,5 @@ export default {
   min-width: 400px;
   padding: 20px
 }
+
 </style>

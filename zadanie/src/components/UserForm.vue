@@ -1,7 +1,7 @@
 <template>
+
   <form @submit.prevent>
     <p class="subtitle"> Добавление пользователя</p>
-
 
     <div class="input1">
       <label class="label-text">Имя</label>
@@ -23,7 +23,6 @@
 
 <script>
 export default {
-
   data() {
     return {
       list: {
@@ -41,15 +40,17 @@ export default {
         userNumber: ''
       }
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
+
 form {
   display: flex;
   flex-direction: column;
 }
+
 .input1{
   display: flex;
   flex-direction: row;
@@ -68,5 +69,6 @@ form {
   font-size: 20px;
   color:aliceblue
 }
+
 
 </style>
