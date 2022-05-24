@@ -3,8 +3,8 @@
   <div id="v-model-select" >
   <select class="demo" v-model="selected">
     <option disabled value=""> Выберите в списке ниже </option>
-    <option v-for="main in users" :key="main.id"> {{main.userName}} </option>
-  <!-- не получилось, пока, разберусь с этим  -->
+    <option v-for="main in users" :key="main.id"> {{main.userName}}
+    </option>
   </select>
 </div>
 
@@ -13,13 +13,15 @@
 <script>
 export default {
   name: "check-box",
+  
   data() {
-    // users: localStorage;
     return {
-      selected: ''
+      selected: '',
+      users: [...JSON.parse(localStorage.getItem('user'))]
     }
-  }
+  },
 }
+console.log('---', localStorage.getItem('user'))
 </script>
 
 <style scoped>

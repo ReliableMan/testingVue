@@ -9,7 +9,7 @@
   </div>
 
   <my-modal v-model:show="modalVisible">
-   <user-form  @create="createUser"/>
+   <user-form :storage="storage"  @create="createUser"/>
   </my-modal>
 
   <user-list 
@@ -39,11 +39,7 @@ export default {
     return {
       lists: [],
       modalVisible: false,
-      selectedSort: '',
-      sortOptions: [
-        {value: 'userName', name: 'По имени'},
-        {value: 'userNumber', name: 'По номеру'}
-      ]
+      // storage: [...JSON.parse(localStorage.getItem('user'))]
     }
   },
   methods: {
@@ -78,6 +74,7 @@ export default {
    }
  }
 }
+ 
 </script>
 
 <style>
