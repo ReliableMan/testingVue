@@ -18,15 +18,30 @@
   @sort="$emit('sort', list)" 
   @sortNum="$emit('sortNum', list)">
 
-		<tr>
-      <td>{{list.userName}}</td>
+		<tr >
+      
+      <td> {{list.userName}}
+      <table v-if="list.userMain" id="table2">
+        <tr>
+          <td>Начальник: {{list.userMain}}</td>
+        </tr>
+      </table>
+      
+      </td>
+      
 			<td>{{list.userNumber}} 
+
       <button-delete 
       @click="$emit('remove', list)">
       </button-delete>
       </td>
 
+
 		</tr>
+    <!-- <tr > 
+      <h5>hey</h5>
+    </tr> -->
+
 	</tbody>
   </transition-group>
 

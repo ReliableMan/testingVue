@@ -5,11 +5,11 @@
   
   <div class="header">
     <my-button @click="showModal">Добавить</my-button>
-    <!-- <my-select v-model="selectedSort" :options="sortOptions"></my-select> -->
+    
   </div>
 
   <my-modal v-model:show="modalVisible">
-   <user-form :storage="storage"  @create="createUser"/>
+   <user-form @create="createUser"/>
   </my-modal>
 
   <user-list 
@@ -26,25 +26,23 @@
 import UserForm from "@/components/UserForm";
 import UserList from "@/components/UserList"
 import MyButton from './components/UI/MyButton.vue';
-// import MySelect from './components/UI/MySelect.vue';
 
 
 export default {
   components: {
     UserForm, UserList,
     MyButton,
-    // MySelect
   },
   data() {
     return {
       lists: [],
       modalVisible: false,
-      // storage: [...JSON.parse(localStorage.getItem('user'))]
     }
   },
   methods: {
     createUser(user) {
         this.lists.push(user);
+        console.log("user", user)
         localStorage.setItem('user', JSON.stringify(this.lists));
         this.modalVisible = false;
     },

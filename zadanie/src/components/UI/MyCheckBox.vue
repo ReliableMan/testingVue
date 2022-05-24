@@ -1,7 +1,7 @@
 <template>
 
   <div id="v-model-select" >
-  <select class="demo" v-model="selected">
+  <select @input="updateSelect" :value="modelValue" class="demo" v-model="selected">
     <option disabled value=""> Выберите в списке ниже </option>
     <option v-for="main in users" :key="main.id"> {{main.userName}}
     </option>
@@ -13,7 +13,11 @@
 <script>
 export default {
   name: "check-box",
-  
+  methods: {
+    updateSelect(event) {
+      this.$emit('update:modelValue', event.target.value)
+    }
+  },
   data() {
     return {
       selected: '',
@@ -21,7 +25,6 @@ export default {
     }
   },
 }
-console.log('---', localStorage.getItem('user'))
 </script>
 
 <style scoped>

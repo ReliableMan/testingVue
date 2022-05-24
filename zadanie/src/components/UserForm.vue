@@ -15,7 +15,7 @@
 
     <div class="input1">
         <label class="label-text">Начальник</label>
-        <check-box></check-box>
+        <check-box v-model="list.userMain"></check-box>
     </div>
         <my-button @click="createUser">Сохранить</my-button>
   </form>
@@ -27,7 +27,8 @@ export default {
     return {
       list: {
         userName: '',
-        userNumber: ''
+        userNumber: '',
+        userMain: ''
       }
     }
   }, 
@@ -37,7 +38,8 @@ export default {
       this.$emit('create', this.list)
       this.list = {
         userName: '',
-        userNumber: ''
+        userNumber: '',
+        userMain: ''
       }
     }
   },
